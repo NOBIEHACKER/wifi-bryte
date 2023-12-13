@@ -75,7 +75,7 @@ class WifiCracker:
         else:
             print(f"\nCracking password for SSID: {selected_networks[0].ssid}")
 
-        selected_wordlist = self.select_wordlist()
+        selected_wordlist = select_wordlist()
 
         cracked_passwords = []
 
@@ -84,7 +84,7 @@ class WifiCracker:
                 password = line.strip()
                 for network in selected_networks:
                     if self.crack_password(network, password):
-                        self.print_message(f"\nPassword cracked for SSID: {network.ssid}", Fore.GREEN)
+                        print_message(f"\nPassword cracked for SSID: {network.ssid}", Fore.GREEN)
                         print("Password:", password)
                         cracked_passwords.append((password, time.strftime("%H:%M:%S")))
                         break
@@ -92,7 +92,7 @@ class WifiCracker:
                         print(f"Trying password: {password} on SSID: {network.ssid}")
 
         if not selected_networks:
-            self.print_message("\nAll network passwords have been cracked.", Fore.GREEN)
+            print_message("\nAll network passwords have been cracked.", Fore.GREEN)
         else:
             print("\nUnable to crack password for the following network(s):")
             for network in selected_networks:
@@ -102,6 +102,7 @@ class WifiCracker:
             print("\nSuccessfully cracked passwords:")
             for password, crack_time in cracked_passwords:
                 print(f"Password: {password}\tCrack Time: {crack_time}")
+
 
 if __name__ == "__main__":
     cracker = WifiCracker()
